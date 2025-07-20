@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3001;
 // 4. Create a basic test route
 //    This is just to make sure our server is working
 app.get('/', (req, res) => {
-  res.send('Hello from the backend!');
+  res.send('Hello from the front end!');
 });
 
 // 5. Start the server and listen for incoming requests
