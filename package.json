@@ -1,0 +1,44 @@
+{
+  "name": "threadly",
+  "version": "1.0.0",
+  "description": "Inbox Evolved...",
+  "keywords": [
+    "gmail",
+    "email",
+    "inbox",
+    "chat",
+    "messenger",
+    "ai",
+    "gemini",
+    "openai",
+    "mistral",
+    "bubbles",
+    "simple",
+    "conversations",
+    "productivity",
+    "node",
+    "react",
+    "react-native",
+    "modern",
+    "students",
+    "sleek"
+  ],
+  "homepage": "https://github.com/saipuneeth2706/Threadly#readme",
+  "bugs": {
+    "url": "https://github.com/saipuneeth2706/Threadly/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saipuneeth2706/Threadly.git"
+  },
+  "license": "MIT",
+  "author": "Sai Puneeth <saipuneeth2004@gmail.com> (https://github.com/saipuneeth2706)",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
