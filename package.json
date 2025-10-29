@@ -2,6 +2,15 @@
   "name": "threadly",
   "version": "1.0.0",
   "description": "Inbox Evolved...",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "start:server": "npm start --workspace=server",
+    "start:client": "npm run dev --workspace=client",
+    "install": "npm install --workspaces"
+  },
   "keywords": [
     "gmail",
     "email",
@@ -32,16 +41,5 @@
     "url": "git+https://github.com/saipuneeth2706/Threadly.git"
   },
   "license": "MIT",
-  "author": "Sai Puneeth <saipuneeth2004@gmail.com> (https://github.com/saipuneeth2706)",
-  "type": "commonjs",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "dependencies": {
-    "dotenv": "^17.2.1",
-    "express": "^5.1.0",
-    "googleapis": "^155.0.1",
-    "nodemon": "^3.1.10"
-  }
+  "author": "Sai Puneeth <saipuneeth2004@gmail.com> (https://github.com/saipuneeth2706)"
 }
