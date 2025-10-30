@@ -1,0 +1,33 @@
+{
+  "name": "threadly",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"npm:start:*\" --kill-others",
+    "start:dev": "concurrently \"npm:start:dev:*\" --kill-others",
+    "start:backend": "npm run start --prefix backend",
+    "start:dev:backend": "npm run start:dev --prefix backend",
+    "start:web": "npm run dev --prefix web",
+    "start:mobile": "npm run start --prefix mobile"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saipuneeth2706/Threadly.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/saipuneeth2706/Threadly/issues"
+  },
+  "homepage": "https://github.com/saipuneeth2706/Threadly#readme",
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

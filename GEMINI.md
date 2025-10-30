@@ -14,6 +14,18 @@ The backend is built with NestJS, a progressive Node.js framework for building e
 
 ## Building and Running
 
+### Running the entire project
+
+From the root directory, you can run the following commands to start the entire project at once:
+
+```bash
+# Starts the backend, web, and mobile applications in development mode.
+npm run start:dev
+
+# Starts the backend, web, and mobile applications in production mode.
+npm start
+```
+
 ### Backend
 
 The backend is a NestJS application located in the `backend/` directory.
@@ -58,7 +70,23 @@ npm run test:cov
 
 ### Frontend (Web & Mobile)
 
-**TODO:** Add build and run instructions for the web and mobile applications once they are created.
+The web and mobile applications can be started from the root directory using the commands mentioned in the "Running the entire project" section. However, if you want to run them individually, you can use the following commands:
+
+**Web:**
+
+```bash
+cd web
+npm install
+npm run dev
+```
+
+**Mobile:**
+
+```bash
+cd mobile
+npm install
+npm start
+```
 
 ## Development Conventions
 
