@@ -1,6 +1,6 @@
 
 import { Injectable } from '@nestjs/common';
-import { google } from 'googleapis';
+import { google, gmail_v1 } from 'googleapis'; // Import gmail_v1 for types
 
 @Injectable()
 export class GmailService {
@@ -11,9 +11,24 @@ export class GmailService {
     const gmail = google.gmail({ version: 'v1', auth: oauth2Client });
     const res = await gmail.users.messages.list({
       userId: 'me',
-      // You can add more parameters here, like q: 'is:unread'
+      maxResults: 50, // Limit to 50 emails
     });
 
-    return res.data;
+    const messages = res.data.messages || [];
+
+    // Fetch full details for each message
+    const fullMessages = await Promise.all(
+      messages.map(async (message) => {
+        // Ensure message.id is treated as a string
+        const msg = await gmail.users.messages.get({
+          userId: 'me',
+          id: message.id!,
+          format: 'full', // Request full message payload
+        });
+        return msg.data;
+      })
+    );
+
+    return fullMessages;
   }
 }
