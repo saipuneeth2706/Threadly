@@ -108,36 +108,59 @@ export default function Home() {
   };
 
   const getEmailBody = (payload: EmailPayload): string => {
-    if (payload.body && payload.body.data) {
-      return decodeBase64(payload.body.data);
+    // Helper to find body part by MIME type
+    const findBodyPart = (parts: EmailPayload[] | undefined, mimeType: string): string | null => {
+      if (!parts) return null;
+      for (const part of parts) {
+        if (part.mimeType === mimeType && part.body?.data) {
+          return decodeBase64(part.body.data);
+        }
+        if (part.parts) {
+          const found = findBodyPart(part.parts, mimeType);
+          if (found) return found;
+        }
+      }
+      return null;
+    };
+
+    // Prioritize HTML part
+    let htmlBody = findBodyPart(payload.parts, "text/html");
+    if (htmlBody) {
+      return htmlBody;
     }
 
-    if (payload.parts) {
-      for (const part of payload.parts) {
-        const body = getEmailBody(part);
-        if (body) return body;
-      }
+    // Fallback to plain text if no HTML part
+    let plainTextBody = findBodyPart(payload.parts, "text/plain");
+    if (plainTextBody) {
+      return plainTextBody;
     }
-    return "";
+
+    // Last resort: check the main payload body if it's not multipart
+    if (payload.body && payload.body.data && payload.mimeType === "text/html") {
+      return decodeBase64(payload.body.data);
+    }
+    if (payload.body && payload.body.data && payload.mimeType === "text/plain") {
+        return decodeBase64(payload.body.data);
+    }
+
+    return "No body content";
   };
 
   const decodeBase64 = (base64: string): string => {
     try {
       // Decode base64 to a UTF-8 string
-      let decoded = Buffer.from(base64, "base64").toString("utf-8");
-      // Clean up common issues with Gmail's base64 encoding (e.g., URL-safe characters)
-      decoded = decoded.replace(/-/g, "+").replace(/_/g, "/");
+      let decoded = Buffer.from(base64.replace(/-/g, "+").replace(/_/g, "/"), "base64").toString("utf-8");
       return decoded;
     } catch (e) {
       console.error("Error decoding base64:", e);
-      return "[Undecodable Content]";
+      return "[Unable to decode content]";
     }
   };
 
   const selectedChat = selectedDomain ? chats.get(selectedDomain) : null;
 
   return (
-    <div style={{ padding: "20px", fontFamily: "sans-serif" }}>
+    <div style={{ padding: "20px", fontFamily: "sans-serif", backgroundColor: "#f8f8f8", minHeight: "100vh" }}>
       <h1>Threadly Frontend Demo (Chat View)</h1>
 
       <div>
@@ -205,13 +228,14 @@ export default function Home() {
                   <div
                     key={message.id}
                     style={{
-                      borderBottom: "1px dashed #eee",
+                      border: "1px solid #e0e0e0",
+                      borderRadius: "8px",
+                      padding: "15px",
                       marginBottom: "15px",
-                      paddingBottom: "15px",
+                      backgroundColor: "white",
+                      boxShadow: "0 2px 4px rgba(0,0,0,0.05)",
                     }}
                   >
-                    <strong>Message ID:</strong> {message.id}
-                    <br />
                     <strong>From:</strong>{" "}
                     {
                       message.payload.headers.find(
@@ -227,16 +251,17 @@ export default function Home() {
                     <br />
                     <strong>Date:</strong> {new Date(message.internalDate).toLocaleString()}
                     <br />
-                    <p>
-                        <strong>Subject:</strong> {message.payload.headers.find(h => h.name === 'Subject')?.value}
+                    <strong>Subject:</strong> {message.payload.headers.find(h => h.name === 'Subject')?.value}
+                    <br />
+                    <p style={{ marginTop: "10px", marginBottom: "10px", borderTop: "1px solid #eee", paddingTop: "10px" }}>
+                        <strong>Body:</strong>
                     </p>
-                    <p>
-                        <strong>Snippet:</strong> {message.snippet}
-                    </p>
-                    <div style={{backgroundColor: "#f9f9f9", padding: "10px", border: "1px solid #eee", whiteSpace: "pre-wrap"}}>
-                        {getEmailBody(message.payload) || "No body content"}
-                    </div>
-
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: getEmailBody(message.payload),
+                      }}
+                      style={{ overflowX: "auto", border: "1px solid #f0f0f0", padding: "10px", borderRadius: "4px", backgroundColor: "#fff" }}
+                    />
                   </div>
                 ))}
               </div>
