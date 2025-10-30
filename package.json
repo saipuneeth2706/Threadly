@@ -12,7 +12,7 @@
     "start:dev": "concurrently \"npm:start:dev:*\" --kill-others",
     "start:backend": "npm run start --prefix backend",
     "start:dev:backend": "npm run start:dev --prefix backend",
-    "start:web": "npm run dev --prefix web",
+    "start:web": "PORT=3001 npm run dev --prefix web",
     "start:mobile": "npm run start --prefix mobile"
   },
   "repository": {

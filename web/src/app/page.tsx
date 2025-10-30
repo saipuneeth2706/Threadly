@@ -260,7 +260,7 @@ export default function Home() {
                       dangerouslySetInnerHTML={{
                         __html: getEmailBody(message.payload),
                       }}
-                      style={{ overflowX: "auto", border: "1px solid #f0f0f0", padding: "10px", borderRadius: "4px", backgroundColor: "#fff" }}
+                      style={{ overflowX: "auto", border: "1px solid #f0f0f0", padding: "10px", borderRadius: "4px", backgroundColor: " #fff" }}
                     />
                   </div>
                 ))}

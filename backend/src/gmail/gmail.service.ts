@@ -11,7 +11,7 @@ export class GmailService {
     const gmail = google.gmail({ version: 'v1', auth: oauth2Client });
     const res = await gmail.users.messages.list({
       userId: 'me',
-      maxResults: 100,
+      maxResults: 200,
     });
 
     const messages = res.data.messages || [];
