@@ -7,7 +7,7 @@ This repository contains the source code for **Threadly**, an opinionated email 
 The project is divided into three main components:
 
 *   **`web/`**: A Next.js application for the web interface.
-*   **`mobile/`**: A native Android application (Kotlin/Compose).
+*   **`mobile/`**: A React Native application for Android and iOS.
 *   **`backend/`**: A Node.js (NestJS) application that serves as the API and handles all business logic.
 
 The backend is built with NestJS, a progressive Node.js framework for building efficient, reliable and scalable server-side applications.

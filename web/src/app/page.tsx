@@ -220,7 +220,7 @@ export default function Home() {
                 style={{
                   border: "1px solid #ddd",
                   padding: "10px",
-                  maxHeight: "600px",
+                  maxHeight: "900px",
                   overflowY: "auto",
                 }}
               >
