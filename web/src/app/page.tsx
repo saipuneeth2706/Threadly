@@ -109,7 +109,10 @@ export default function Home() {
 
   const getEmailBody = (payload: EmailPayload): string => {
     // Helper to find body part by MIME type
-    const findBodyPart = (parts: EmailPayload[] | undefined, mimeType: string): string | null => {
+    const findBodyPart = (
+      parts: EmailPayload[] | undefined,
+      mimeType: string
+    ): string | null => {
       if (!parts) return null;
       for (const part of parts) {
         if (part.mimeType === mimeType && part.body?.data) {
@@ -139,8 +142,12 @@ export default function Home() {
     if (payload.body && payload.body.data && payload.mimeType === "text/html") {
       return decodeBase64(payload.body.data);
     }
-    if (payload.body && payload.body.data && payload.mimeType === "text/plain") {
-        return decodeBase64(payload.body.data);
+    if (
+      payload.body &&
+      payload.body.data &&
+      payload.mimeType === "text/plain"
+    ) {
+      return decodeBase64(payload.body.data);
     }
 
     return "No body content";
@@ -149,7 +156,10 @@ export default function Home() {
   const decodeBase64 = (base64: string): string => {
     try {
       // Decode base64 to a UTF-8 string
-      let decoded = Buffer.from(base64.replace(/-/g, "+").replace(/_/g, "/"), "base64").toString("utf-8");
+      let decoded = Buffer.from(
+        base64.replace(/-/g, "+").replace(/_/g, "/"),
+        "base64"
+      ).toString("utf-8");
       return decoded;
     } catch (e) {
       console.error("Error decoding base64:", e);
@@ -160,7 +170,14 @@ export default function Home() {
   const selectedChat = selectedDomain ? chats.get(selectedDomain) : null;
 
   return (
-    <div style={{ padding: "20px", fontFamily: "sans-serif", backgroundColor: "#f8f8f8", minHeight: "100vh" }}>
+    <div
+      style={{
+        padding: "20px",
+        fontFamily: "sans-serif",
+        backgroundColor: "#f8f8f8",
+        minHeight: "100vh",
+      }}
+    >
       <h1>Threadly Frontend Demo (Chat View)</h1>
 
       <div>
@@ -186,7 +203,13 @@ export default function Home() {
 
       <div style={{ display: "flex", marginTop: "20px" }}>
         {/* Chats List */}
-        <div style={{ width: "30%", borderRight: "1px solid #ccc", paddingRight: "20px" }}>
+        <div
+          style={{
+            width: "30%",
+            borderRight: "1px solid #ccc",
+            paddingRight: "20px",
+          }}
+        >
           <h2>Chats ({chats.size})</h2>
           <ul style={{ listStyle: "none", padding: 0 }}>
             {Array.from(chats.values()).map((chat) => (
@@ -201,10 +224,13 @@ export default function Home() {
                   cursor: "pointer",
                 }}
               >
-                <strong>{chat.domain}</strong> (
-                {chat.messages.length} messages)
+                <strong>{chat.domain}</strong> ({chat.messages.length} messages)
                 <p style={{ fontSize: "0.8em", color: "#666" }}>
-                  {chat.messages[chat.messages.length - 1]?.snippet.substring(0, 100)}...
+                  {chat.messages[chat.messages.length - 1]?.snippet.substring(
+                    0,
+                    100
+                  )}
+                  ...
                 </p>
               </li>
             ))}
@@ -238,9 +264,8 @@ export default function Home() {
                   >
                     <strong>From:</strong>{" "}
                     {
-                      message.payload.headers.find(
-                        (h) => h.name === "From"
-                      )?.value
+                      message.payload.headers.find((h) => h.name === "From")
+                        ?.value
                     }
                     <br />
                     <strong>To:</strong>{" "}
@@ -249,18 +274,36 @@ export default function Home() {
                         ?.value
                     }
                     <br />
-                    <strong>Date:</strong> {new Date(message.internalDate).toLocaleString()}
+                    <strong>Date:</strong>{" "}
+                    {new Date(message.internalDate).toLocaleString()}
                     <br />
-                    <strong>Subject:</strong> {message.payload.headers.find(h => h.name === 'Subject')?.value}
+                    <strong>Subject:</strong>{" "}
+                    {
+                      message.payload.headers.find((h) => h.name === "Subject")
+                        ?.value
+                    }
                     <br />
-                    <p style={{ marginTop: "10px", marginBottom: "10px", borderTop: "1px solid #eee", paddingTop: "10px" }}>
-                        <strong>Body:</strong>
+                    <p
+                      style={{
+                        marginTop: "10px",
+                        marginBottom: "10px",
+                        borderTop: "1px solid #eee",
+                        paddingTop: "10px",
+                      }}
+                    >
+                      <strong>Body:</strong>
                     </p>
                     <div
                       dangerouslySetInnerHTML={{
                         __html: getEmailBody(message.payload),
                       }}
-                      style={{ overflowX: "auto", border: "1px solid #f0f0f0", padding: "10px", borderRadius: "4px", backgroundColor: " #fff" }}
+                      style={{
+                        overflowX: "auto",
+                        border: "1px solid #f0f0f0",
+                        padding: "10px",
+                        borderRadius: "4px",
+                        backgroundColor: " #fff",
+                      }}
                     />
                   </div>
                 ))}
