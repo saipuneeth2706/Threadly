@@ -1,16 +1,33 @@
 # Threadly Project
 
-## Project Overview
+## Table of Contents
 
-This repository contains the source code for **Threadly**, an opinionated email client that transforms cluttered inboxes into a clean, intuitive, chat-based interface.
+*   [About](#about)
+*   [Features](#features)
+*   [Technologies](#technologies)
+*   [Building and Running](#building-and-running)
+*   [Testing](#testing)
+*   [Gmail Integration](#gmail-integration)
+*   [Development Conventions](#development-conventions)
+*   [Contributing](#contributing)
+*   [License](#license)
 
-The project is divided into three main components:
+## About
 
-*   **`web/`**: A Next.js application for the web interface.
-*   **`mobile/`**: A React Native application for Android and iOS.
-*   **`backend/`**: A Node.js (NestJS) application that serves as the API and handles all business logic.
+Threadly is an opinionated email client that transforms your cluttered inbox into a clean, intuitive, chat-based interface. It's designed to help you manage your emails more efficiently and effectively.
 
-The backend is built with NestJS, a progressive Node.js framework for building efficient, reliable and scalable server-side applications.
+## Features
+
+*   **Chat-based interface:** View your emails as conversations, not as a long list of messages.
+*   **Clean and intuitive design:** Focus on what matters most: your emails.
+*   **Gmail integration:** Connect your Gmail account and start using Threadly in seconds.
+*   **Cross-platform:** Use Threadly on the web, on your desktop, and on your mobile device.
+
+## Technologies
+
+*   **Backend:** Node.js, NestJS, Passport, Google APIs
+*   **Web:** Next.js, React, TypeScript, Tailwind CSS
+*   **Mobile:** React Native, TypeScript
 
 ## Building and Running
 
@@ -55,19 +72,6 @@ npm run start:dev
 npm run start:prod
 ```
 
-**Testing:**
-
-```bash
-# unit tests
-npm run test
-
-# e2e tests
-npm run test:e2e
-
-# test coverage
-npm run test:cov
-```
-
 ### Frontend (Web & Mobile)
 
 The web and mobile applications can be started from the root directory using the commands mentioned in the "Running the entire project" section. However, if you want to run them individually, you can use the following commands:
@@ -86,6 +90,38 @@ npm run dev
 cd mobile
 npm install
 npm start
+```
+
+## Testing
+
+### Backend
+
+```bash
+# unit tests
+npm run test --prefix backend
+
+# e2e tests
+npm run test:e2e --prefix backend
+
+# test coverage
+npm run test:cov --prefix backend
+```
+
+### Web
+
+```bash
+# lint
+npm run lint --prefix web
+```
+
+### Mobile
+
+```bash
+# lint
+npm run lint --prefix mobile
+
+# test
+npm run test --prefix mobile
 ```
 
 ## Gmail Integration
@@ -141,6 +177,17 @@ The backend supports retrieving emails from a user'''s Gmail inbox using the Gma
 
 ## Development Conventions
 
-*   **Code Style:** The backend uses Prettier for code formatting and ESLint for linting. Run `npm run format` and `npm run lint` in the `backend` directory to format and lint the code.
+*   **Code Style:**
+    *   **Backend:** The backend uses Prettier for code formatting and ESLint for linting. Run `npm run format` and `npm run lint` in the `backend` directory to format and lint the code.
+    *   **Web:** The web application uses ESLint for linting. Run `npm run lint` in the `web` directory to lint the code.
+    *   **Mobile:** The mobile application uses Prettier and ESLint for code formatting and linting. Run `npm run lint` in the `mobile` directory to lint the code.
 *   **Branching:** (TODO: Define branching strategy, e.g., GitFlow)
 *   **Commits:** (TODO: Define commit message conventions)
+
+## Contributing
+
+Contributions are welcome! Please read the contributing guidelines before getting started.
+
+## License
+
+This project is licensed under the ISC License.
