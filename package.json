@@ -28,6 +28,11 @@
   },
   "homepage": "https://github.com/saipuneeth2706/Threadly#readme",
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.19",
+    "@types/node": "^24.9.2",
     "concurrently": "^9.2.1"
+  },
+  "dependencies": {
+    "@nestjs/axios": "^4.0.1"
   }
 }

@@ -1,12 +1,11 @@
-
 import { Injectable } from '@nestjs/common';
-import { google, gmail_v1 } from 'googleapis'; // Import gmail_v1 for types
+import { google } from 'googleapis';
 
 @Injectable()
 export class GmailService {
   async getEmails(accessToken: string) {
     const oauth2Client = new google.auth.OAuth2();
-    oauth2Client.setCredentials({ access_token: accessToken });
+    oauth2Client.setCredentials({ accessToken });
 
     const gmail = google.gmail({ version: 'v1', auth: oauth2Client });
     const res = await gmail.users.messages.list({
@@ -26,7 +25,7 @@ export class GmailService {
           format: 'full', // Request full message payload
         });
         return msg.data;
-      })
+      }),
     );
 
     return fullMessages;
