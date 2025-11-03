@@ -141,5 +141,3 @@ Documentation:
 - Push notifications
 
 ---
-
-**Project Status:** Complete and ready to use! 🎉
