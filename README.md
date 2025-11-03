@@ -2,7 +2,7 @@
 
 ## Project update!
 
-I've successfully built a Gmail chat application called **Threadly** that transforms your Gmail inbox into a modern chat interface.
+I've successfully built a Gmail chat application called **Threadly** that transforms your Gmail inbox into a modern chat interface. - still needs testing and polishing.
 
 ## What Was Built
 
