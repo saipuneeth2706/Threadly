@@ -1,8 +1,8 @@
-# Threadly Implementation Summary
+# Threadly UPDATE Summary
 
-## Project Complete! ✅
+## Project update!
 
-I've successfully built a complete Gmail chat application called **Threadly** that transforms your Gmail inbox into a modern chat interface.
+I've successfully built a Gmail chat application called **Threadly** that transforms your Gmail inbox into a modern chat interface.
 
 ## What Was Built
 
